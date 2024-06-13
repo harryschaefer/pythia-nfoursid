@@ -1,32 +1,28 @@
-# NFourSID
+# Pythia N4SID
 
-Implementation of the N4SID algorithm for subspace identification [1], together with Kalman filtering and state-space
-models.
+The implemention of N4SID, interacted with via a concise API, for utilisation within Pythia's black-boxed IBR identification scheme.
 
-State-space models are versatile models for representing multi-dimensional timeseries.
-As an example, the ARMAX(_p_, _q_, _r_)-models - AutoRegressive MovingAverage with eXogenous input -
-are included in the representation of state-space models.
-By extension, ARMA-, AR- and MA-models can be described, too.
-The numerical implementations are based on [2].
+## nfoursid
 
-## Installation
-Releases are made available on PyPi.
-The recommended installation method is via `pip`:
+Functionality forked from [spmvg:nfoursid](https://github.com/spmvg/nfoursid).
 
-```python
-pip install nfoursid
+## notebook
+
+Primarily for local development, including extensions of the classes implemented in nfoursid, complete with plotting and interactivity functionality.
+
+## local-docker
+
+For local development, implementing functionality to expose the nfoursid API locally via a docker-compose deployment.
+
+To run:
+```
+docker compose --project-directory local-docker up --build
 ```
 
-For a development setup, the requirements are in `dev-requirements.txt`.
-Subsequently, this repo can be locally `pip`-installed.
+## gcp-deploy.sh
 
-## Documentation and code example
-Documentation is provided [here](https://nfoursid.readthedocs.io/en/latest/).
-An example Jupyter notebook is provided [here](https://github.com/spmvg/nfoursid/blob/master/examples/Overview.ipynb).
-
-## References
-
-1. Van Overschee, Peter, and Bart De Moor. "N4SID: Subspace algorithms for the identification of combined
-   deterministic-stochastic systems." Automatica 30.1 (1994): 75-93.
-2. Verhaegen, Michel, and Vincent Verdult. _Filtering and system identification: a least squares approach._
-   Cambridge university press, 2007.
+Code to carry the API to a GCP Cloud Function deployment. Must be authentication to run.
+```
+gcloud auth login
+gcloud config set project pythia-f8a4
+```

@@ -1,11 +1,10 @@
 from typing import List, Tuple
 
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from nfoursid.state_space import StateSpace
-from nfoursid.utils import Utils, Decomposition
+from .state_space import StateSpace
+from .utils import Utils, Decomposition
 
 
 class NFourSID:
@@ -181,18 +180,3 @@ class NFourSID:
             self.x_dim
         )
         return observability_decomposition
-
-    def plot_eigenvalues(self, ax: plt.axes):  # pragma: no cover
-        """
-        Plot the eigenvalues of the :math:`R_{32}` matrix, so that the order of the state-space model can be determined.
-        Since the :math:`R_{32}` matrix should have been calculated, this function can only be used after
-        performing ``self.subspace_identification``.
-        """
-        if self.R32_decomposition is None:
-            raise Exception('Perform subspace identification first.')
-
-        ax.semilogy(np.diagonal(self.R32_decomposition.eigenvalues), 'x')
-        ax.set_title('Estimated observability matrix decomposition')
-        ax.set_xlabel('Index')
-        ax.set_ylabel('Eigenvalue')
-        ax.grid()

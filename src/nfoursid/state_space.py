@@ -2,10 +2,8 @@ from typing import List
 
 import numpy as np
 import pandas as pd
-from matplotlib import pyplot as plt
-from matplotlib import figure as matplotlib_figure
 
-from nfoursid.utils import Utils
+from .utils import Utils
 
 
 class StateSpace:
@@ -172,29 +170,6 @@ class StateSpace:
         Utils.validate_matrix_shape(e, (self.y_dim, 1), 'e')
 
         return self.c @ x + self.d @ u + e
-
-    def plot_input_output(self, fig: matplotlib_figure.Figure):  # pragma: no cover
-        """
-        Given a matplotlib figure ``fig``, plot the inputs and outputs of the state-space model.
-        """
-        ax1 = fig.add_subplot(2, 1, 1)
-        ax2 = fig.add_subplot(2, 1, 2, sharex=ax1)
-
-        for output_name, outputs in zip(self.y_column_names, np.array(self.ys).squeeze(axis=2).T):
-            ax1.plot(outputs, label=output_name, alpha=.6)
-        ax1.legend(loc='upper right')
-        ax1.set_ylabel('Output $y$ (a.u.)')
-        ax1.grid()
-
-        for input_name, inputs in zip(self.u_column_names, np.array(self.us).squeeze(axis=2).T):
-            ax2.plot(inputs, label=input_name, alpha=.6)
-        ax2.legend(loc='upper right')
-        ax2.set_ylabel('Input $u$ (a.u.)')
-        ax2.set_xlabel('Index')
-        ax2.grid()
-
-        ax1.set_title('Inputs and outputs of state-space model')
-        plt.setp(ax1.get_xticklabels(), visible=False)
 
     def to_dataframe(self) -> pd.DataFrame:
         """

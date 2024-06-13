@@ -1,6 +1,10 @@
+.DS_Store
 __pycache__
 *.egg-info
 htmlcov
 .coverage
 dist
 build
+venv
+.ipynb_checkpoints
+.vscode
